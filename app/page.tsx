@@ -1,113 +1,152 @@
-import Image from "next/image";
+"use client";
+import React from "react";
+import { Grid, Box } from "@mui/material";
+import { Swiper, SwiperSlide } from "swiper/react";
+import GetBook from "@/components/GetBook/GetBook";
+import CardComponent from "@/components/Card/Card";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
 
-export default function Home() {
+// import required modules
+import { Pagination } from "swiper/modules";
+const images = [
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  "https://beyond-projects.s3.us-east-2.amazonaws.com/e-reader-app/images/image%2010.png",
+  // Add more image URLs as needed
+];
+const books = [
+  { title: "War and Peace", author: "Leo Tolstoy" },
+  { title: "To Kill a Mockingbird", author: "Harper Lee" },
+  { title: "1984", author: "George Orwell" },
+  { title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
+  { title: "Pride and Prejudice", author: "Jane Austen" },
+  { title: "War and Peace", author: "Leo Tolstoy" },
+  { title: "To Kill a Mockingbird", author: "Harper Lee" },
+  { title: "1984", author: "George Orwell" },
+  { title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
+  { title: "Pride and Prejudice", author: "Jane Austen" },
+  { title: "War and Peace", author: "Leo Tolstoy" },
+  { title: "To Kill a Mockingbird", author: "Harper Lee" },
+  { title: "1984", author: "George Orwell" },
+  { title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
+  { title: "War and Peace", author: "Leo Tolstoy" },
+  { title: "To Kill a Mockingbird", author: "Harper Lee" },
+  { title: "1984", author: "George Orwell" },
+  { title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
+  { title: "War and Peace", author: "Leo Tolstoy" },
+  { title: "To Kill a Mockingbird", author: "Harper Lee" },
+  { title: "1984", author: "George Orwell" },
+  { title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
+  { title: "War and Peace", author: "Leo Tolstoy" },
+  { title: "To Kill a Mockingbird", author: "Harper Lee" },
+  { title: "1984", author: "George Orwell" },
+  { title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
+];
+export default function page() {
+  const minArrayLength = Math.min(books.length, images.length);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "0px 0px",
+      }}
+    >
+      <Grid container item spacing={2}>
+        <Grid item sm={12} md={12} sx={{ padding: "0 0px" }}>
+          <GetBook />
+        </Grid>
+        <Grid
+          container
+          item
+          sm={12}
+          md={12}
+          sx={{
+            padding: "0px 40px",
+            justifyContent: "center",
+            alignItems: "center",
+            bgcolor: "#fff",
+            height: "50vh", // Set the container height to 100% of the viewport height
+          }}
+        >
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={10}
+            pagination={{
+              clickable: true,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 4,
+                spaceBetween: 40,
+              },
+              1024: {
+                slidesPerView: 5,
+                spaceBetween: 40,
+              },
+            }}
+            modules={[Pagination]}
+            className="mySwiper"
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              background: "#fff",
+              width: "100%", // Set the width to 100%
+              height: "100%", // Set the height to 100%
+            }}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+            {images.slice(0, minArrayLength).map((imageUrl, index) => (
+              <SwiperSlide key={index}>
+                <Grid
+                  item
+                  style={{ flex: " 0 25%", maxWidth: "25%" }}
+                >
+                  <CardComponent
+                    imageUrl={imageUrl}
+                    text={`by ${books[index].author}`}
+                    text2={`${books[index].title}`}
+                  />
+                </Grid>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
